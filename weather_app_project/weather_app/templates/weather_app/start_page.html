@@ -1,0 +1,31 @@
+{% extends "weather_app/base.html "%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+<h1> Weather </h1>
+
+<form method="POST">
+  {% csrf_token %}
+
+  {{ form|crispy }}
+
+  <button type="submit"> See weather </button>
+</form>
+
+<div class="comparison-container">
+{% if weather_data1 %}
+  <div class="city-container">
+    {% include 'weather_app/forecasts.html' with weather_data=weather_data1 daily_forecasts=daily_forecasts1%}
+  </div>
+{% endif %}
+{% if weather_data1 %}
+  <div class="city-container">
+    {% include 'weather_app/forecasts.html' with weather_data=weather_data2 daily_forecasts=daily_forecasts2%}
+  </div>
+{% endif %}
+</div>
+{% endblock content%}
+
